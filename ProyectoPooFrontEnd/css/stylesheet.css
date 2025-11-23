@@ -1,0 +1,665 @@
+@import url('https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+SC&display=swap');
+
+html, body {
+  overflow-x: hidden;
+}
+body{
+    /*background: radial-gradient(circle 90rem at center,rgb(42, 238, 17),rgb(22, 22, 213),rgb(71, 1, 71));
+    /*background: radial-gradient(circle 20rem at center,rgb(89, 91, 89),rgb(50, 49, 49),rgb(0, 0, 0));*/
+    background-color: #bcccfe;
+    margin: 0;
+    font-family: "WDXL Lubrifont SC", sans-serif;
+
+}
+
+main{
+    background-color: #bcccfe;
+}
+
+/* footer{
+    height: 6vh;
+} */
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////*/
+
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    height: 8vh;
+    margin-top: initial;
+    width: 100%;
+    padding: 0.1rem 0.4rem;
+    z-index: 2000; 
+}
+.Landingpage-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    width: 100%;
+    height: 8vh;
+
+}
+
+.Landingpage-nav-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    overflow-x: hidden;
+}
+
+#ul-landigPage{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    list-style-type: none;
+    gap: 3rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0 2rem;
+}
+
+#ul-landigPage li{
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+}
+
+.Landingpage-nav ul li:hover{
+    color: cyan;
+    background-color: rgb(44, 42, 42);
+
+}
+
+.Landingpage-nav button{
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 14px;
+    padding: 0.6rem;
+}
+
+#icono-nube{
+    color: black;
+    font-size: 1.5rem !important;
+    padding-left: 0;
+}
+
+.Landingpage-nav-div i{
+    color: rgb(255, 255, 255);
+    font-size: 2.5rem !important;
+    padding: 0 2rem;
+}
+
+
+#Landing-section1 h1{
+    display: flex;
+    align-items: center;
+    align-items: center;
+    
+}
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#contenedor-Landing-page{
+    margin-top: 8vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+}
+#Landing-section1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    font-family: "WDXL Lubrifont SC", sans-serif;
+    /*backdrop-filter: blur(5px);
+    /*background-color: rgba(208, 202, 202, 0.448);
+    border: 2px solid transparent; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.2);*/
+
+    
+}
+   
+#Landing-section1 h1{
+    text-align: center;
+    font-size: 3.1em;
+}
+#Landing-section1 h2{
+    text-align: center;
+    font-size: 1.5em;
+    color: rgb(81, 77, 77);
+    margin: 0.1em;
+    margin-bottom: 1.5em;
+
+}
+
+#Landing-section1 div{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#btn-tryIt{
+    width: 6em;
+    height: 2.5em;
+    font-size: 1.2em;
+    padding: 2px 1px;
+    color: aliceblue;
+    background-color: rgb(10, 10, 10);
+    border-radius: 20px ;
+    cursor: pointer;
+    border: 2px solid transparent; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+#btn-tryIt:hover, .contenedores-derecha-perfil button:hover {
+    /*background: linear-gradient( rgb(86, 72, 72),rgb(22, 138, 138));*/
+    background-color: rgb(95, 108, 222);
+    border-color: cyan;
+}
+
+#Landing-section2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#Landing-section2 img{
+   object-fit: cover;
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#contenedor-editor-codigo{
+    margin-top: 8vh;
+    padding: 1rem;
+}
+
+#contenedor-editores{
+    margin-bottom: 24px;
+}
+
+.altura-editores{
+    height: 50vh;
+}
+
+.nombreEditores{
+    background-color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: black;
+    padding: 0.2rem 1rem;
+    border: solid;
+}
+#resultado-codigo{
+    height: 50vh;
+    width: 100%;
+    background-color: white;
+}
+.contenedor-codigo{
+    height: 94%;
+    background-color: white;
+    border: solid black;
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.CodeMirror {
+    height: 100%;
+}
+
+.modal-content{
+    width: 25vw !important;
+    font-family: "WDXL Lubrifont SC", sans-serif ;
+}
+
+.modal-body, .modal-header{
+    background-color: #2c2c55;
+    color: #bcccfe;
+    border: 0 !important;
+    padding: 2rem 1rem !important;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem 0rem 1rem !important;
+}
+
+.formulario-iniciarSesion{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formulario-iniciarSesion label{
+    margin-left: 10px;
+}
+
+.formulario-iniciarSesion input{
+    background-color: #bcccfe;
+    border-radius: 15px;
+    border: solid;
+    margin-top: 3px;
+    padding: 0.5rem;
+    cursor: text;
+}
+
+.formulario-iniciarSesion input:focus, .contenedores-derecha-perfil input:focus{
+    border-color: cyan;
+    outline: none;
+}
+
+.formulario-iniciarSesion div{
+    display: flex;
+    justify-content: center;
+}
+
+.formulario-iniciarSesion button{
+    border-radius: 10px;
+    width: 70%;
+    margin-top: 10px;
+    align-items: center;
+    background-color: black;
+    color: white;
+}
+
+.formulario-iniciarSesion button:hover{
+    /*background: linear-gradient( rgb(86, 72, 72),rgb(22, 138, 138));*/
+    background-color: rgb(95, 108, 222);
+    border-color: cyan;
+}
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+#contenedor-pantalla-admistrativa{
+    display: flex;
+    width: 100vw;
+    height: 100%;
+    background-color: #bcccfe;
+    overflow: hidden;
+}
+
+#barra-lateral{
+    border: solid;
+    width: 13%;
+    height: 100%;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.barra-lateral-main{
+    box-sizing: border-box;
+    width: 100%;
+
+}
+
+.barra-lateral-header{
+    overflow: hidden;
+    margin-bottom: 7rem;
+}
+
+#barra-lateral svg{
+}
+
+.contenedores-barra-lateral{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+    margin-top: 1rem;
+    word-wrap: break-word;
+    overflow: hidden;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.contenedores-barra-lateral:hover{
+    background-color: rgb(44, 42, 42);
+}
+
+.contenedores-barra-lateral div{
+    font-size: 1.2rem;
+}
+
+.contenedor-proyectos{
+    width: 100%;
+    margin-left: 13%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100vh;
+    overflow: auto;
+    background-color: #bcccfe;
+}
+
+.seccion-barra-navgacion{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 5em;
+    font-size: 1.2rem;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: #bcccfe;
+    z-index: 999;
+}
+
+.barra-busqueda{
+    border-radius: 15px;
+    padding: 0.2rem;
+    background-color: white;
+}
+.seccion-barra-navgacion input{
+    border: 0;
+    border-radius: 10px;
+}
+
+.seccion-barra-navgacion input:focus{
+    outline: none;
+}
+
+.seccion-derecha-navegacion{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.seccion-derecha-navegacion button{
+    background-color: rgb(70, 66, 66);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-group button{
+    background-color: black;
+    font-size: 1.5rem;
+}
+
+#seccion-proyectos{
+    height: 100%;
+    padding: 3rem 3rem 3rem 5rem;
+}
+#contenedor-cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: max-content;
+    grid-auto-rows: minmax(100px, 50vh);
+    padding: 0rem 3rem 3rem 3rem;
+    gap: 1rem;
+    height: 100%;
+    
+}
+
+#contenedor-cards .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0;
+  
+}
+
+#contenedor-cards .card-body div {
+  height: 10rem;
+  width: 10rem;
+}
+
+#contenedor-cards .card img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  padding: 1rem;
+}
+
+#contenedor-cards .card-body {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#seccion-perfil{
+    /* height: 100%; */
+    padding: 2rem;
+}
+.seccion-perfil-cuenta{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* grid-template-rows: 1fr 2fr 1fr; */
+    padding: 5rem;
+    gap: 1rem;
+    /* height: 100%; */
+    overflow-y: auto;
+    background-color: white;
+    margin: 2rem;
+    margin-top: 1rem;
+    font-family: "WDXL Lubrifont SC", sans-serif;
+    font-weight: bolder;
+    color: black;
+}
+
+.seccion-perfil-cuenta div{
+    padding: 2rem;
+    font-size: 1.5rem;
+}
+
+#seccion-perfil i{
+    font-size: 10rem !important;
+    color: black;
+}
+
+.contenedores-derecha-perfil{
+    background-color: #dcdcdc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0rem 8rem !important;
+}
+
+.contenedores-derecha-perfil button{
+    margin-top: 1rem;
+    width: 36%;
+    border-radius: 10px ;
+    padding: 0rem 0.3rem;
+    background-color: black;
+    color: white;
+}
+
+.contenedor-inputs{
+    display: flex;
+    gap: 3rem;
+}
+
+.contenedor-inputs input{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+#seccion-planes{
+    height: 100%;
+    padding: 3rem 3rem 3rem 5rem;
+}
+
+.contenedor-planes{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.plan{
+  width: 350px;
+  border: 1px solid whitesmoke;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2); 
+  margin: 20px;
+  font-weight: bold;
+  color:aliceblue;
+}
+
+#plan-free{
+    background-color: #628aff;
+}
+
+#plan-basic{
+    background-color: #1b52f7;
+}
+
+#plan-premium{
+    background-color:#2c2c55;
+}
+
+.plan-price{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.plan-price span{
+  margin: 5px;
+}
+
+.price-title {
+    font-size: 30px;
+    margin-bottom: 1px;
+}
+
+.plan-body{
+  padding: 16px;
+
+}
+
+.plan-body li{
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.plan-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.plan button{
+    width: 80%;
+    background-color: black;
+    border: #dcdcdc;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacio entre ícono y texto */
+}
+
+input.error {
+  border: 2px solid red !important;
+}
+
+/* Estilos generales para la modal de creación de proyecto */
+#crearProyectoModal .modal-content {
+    width: 25vw !important;
+    font-family: "WDXL Lubrifont SC", sans-serif;
+}
+
+#crearProyectoModal .modal-body, 
+#crearProyectoModal .modal-header {
+    background-color: #2c2c55;
+    color: #bcccfe;
+    border: 0 !important;
+    padding: 2rem 1rem !important;
+}
+
+#crearProyectoModal .modal-header {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem 0rem 1rem !important;
+}
+
+/* Estilos específicos para el formulario de creación */
+#crearProyectoModal .formulario-iniciarSesion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#crearProyectoModal .formulario-iniciarSesion label {
+    margin-left: 10px;
+}
+
+#crearProyectoModal .formulario-iniciarSesion input {
+    background-color: #bcccfe;
+    border-radius: 15px;
+    border: solid;
+    margin-top: 3px;
+    padding: 0.5rem;
+    cursor: text;
+    width: 100%;
+}
+
+#crearProyectoModal .formulario-iniciarSesion input:focus {
+    border-color: cyan;
+    outline: none;
+}
+
+/* Contenedor de botones */
+.botones-crear-proyecto {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.botones-crear-proyecto > div {
+    flex: 1;
+}
+
+/* Estilos para los botones */
+.btn-crear-proyecto {
+    width: 100%;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn-crear-proyecto-cancelar {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-crear-proyecto-confirmar {
+    background-color: #007BFF;
+    color: white;
+}
+
+.btn-crear-proyecto-cancelar:hover {
+    background-color: #5a6268;
+}
+
+.btn-crear-proyecto-confirmar:hover {
+    background-color: #0069d9;
+}
