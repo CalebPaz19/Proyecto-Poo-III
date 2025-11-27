@@ -1,16 +1,33 @@
 let editorHTML = null;
 let editorCSS = null;
 let editorJS = null;
+let loginModal = null;
+let singUpModal = null;
 
 const abrirModal = (boton) => {
-  const loginModal = new bootstrap.Modal(document.getElementById('login-modal'));
-  const singUpModal = new bootstrap.Modal(document.getElementById('singUp-modal'));
+    // Obtener los elementos DOM de los modales.
+    const loginModalElement = document.getElementById('login-modal');
+    const singUpModalElement = document.getElementById('singUp-modal');
 
-  if (boton.id === 'boton-formulario-iniciarSesion') {
-    loginModal.show();
-  } else if (boton.id === 'boton-formulario-registro') {
-    singUpModal.show();
-  }
+    // Obtener o crear las instancias de Bootstrap Modal.
+    let loginModal = bootstrap.Modal.getInstance(loginModalElement);
+    let singUpModal = bootstrap.Modal.getInstance(singUpModalElement);
+
+    if (!loginModal) {
+        loginModal = new bootstrap.Modal(loginModalElement);
+    }
+    if (!singUpModal) {
+        singUpModal = new bootstrap.Modal(singUpModalElement);
+    }
+    
+    // Lógica para cerrar el modal anterior antes de abrir el nuevo.
+    if (boton.id === 'boton-formulario-iniciarSesion') {
+        singUpModal.hide();
+        loginModal.show();
+    } else if (boton.id === 'boton-formulario-registro') {
+        loginModal.hide();
+        singUpModal.show();
+    }
 };
 
 const guardarPantallaActual = (pantalla) => {
@@ -197,7 +214,7 @@ const crearEditores = () => {
 const frame = document.getElementById('resultado-codigo');
 let renderTimer;
 
-
+// Render con srcdoc (y pequeño debounce)
 const actualizarVistaEditor = () => {
   clearTimeout(renderTimer);
   renderTimer = setTimeout(() => {
@@ -270,7 +287,7 @@ window.onload = () => {
 };
 
 const registrarUsuarios = async() => {
-  // Obtener elementos del DOM
+  // Obtener elementos del DOM (solo lo necesario para errores)
   const nombreInput = document.getElementById('signUp-nombre');
   const emailInput = document.getElementById('signUp-email');
   const contraseñaInput = document.getElementById('signUp-contraseña');
@@ -337,7 +354,7 @@ const registrarUsuarios = async() => {
       const userId = data.Usuario?._id;
       if (userId) {
       sessionStorage.setItem("idUsuarioactual", userId);
-      sessionStorage.setItem("planId", data.Usuario.planId);    }
+    }
       
       // Éxito
       mostrarPantallaProyectos();
@@ -412,7 +429,6 @@ const iniciarSesion = async () => {
       }
 
       sessionStorage.setItem("idUsuarioactual", data.Usuario._id);
-      sessionStorage.setItem("planId", data.Usuario.planId);
       
       // Éxito
       mostrarPantallaProyectos();
@@ -460,8 +476,6 @@ const crearNuevoProyecto = async() => {
         return resolve();
       }
 
-
-
       try {
         const requestOptions = {
           method: "POST",
@@ -484,7 +498,7 @@ const crearNuevoProyecto = async() => {
         const proyecto = data.proyecto;
         localStorage.setItem("proyectoActualtId", proyecto._id);
 
-        // refresca la lista de tarjetas:
+        // Si quieres, refresca la lista de tarjetas:
         await cargarProyectos(idPropietario);
 
         // Abre el editor
@@ -542,16 +556,16 @@ const cargarProyectos = async(idPropietario) => {
     
     data.proyectos.forEach(p => {
       cont.innerHTML +=
+      `<div class="card">
+          <div onclick="abrirProyecto('${p._id}')">
+              <img src="img/img_referencia.webp" class="card-img-top" alt="...">
+          </div>
 
-      `<div id="proyectoCard">
-            <div onclick="abrirProyecto('${p._id}')">
-                <img src="${p.img || 'img/img_referencia.webp'}" class="card-img-top" alt="preview">
-            </div>
-            <div id="nombreProyectoCard">
-                <h5>${p.nombre}</h5>
-                <button class="btn btn-danger" onclick="eliminarProyecto('${p._id}')">Eliminar</button>
-            </div>
-        </div>` 
+          <div class="card-body">
+              <h5 class="card-title">${p.nombre}</h5>
+              <button class="btn btn-danger" onclick="eliminarProyecto('${p._id}')">Eliminar</button>
+          </div>
+      </div>`  
     });
   } catch (e) {
     console.error(e);
@@ -586,38 +600,31 @@ const cargarCodigoProyectoActual = async() => {
 }
 
 const guardarCodigoProyectoActual = async() => {
-  const idProyecto = localStorage.getItem("proyectoActualtId");
-  if (!idProyecto) return;
+    const idProyecto = localStorage.getItem("proyectoActualtId");
+    if (!idProyecto) return;
 
-  let screenshot = "";
-  try {
-    screenshot = await capturarProyecto();
-  } catch (e) {
-    console.error("Error capturando preview:", e);
-    // si falla la captura, igual seguimos guardando HTML/CSS/JS
-  }
+    const body = {
+        html: editorHTML ? editorHTML.getValue() : "",
+        css:  editorCSS ? editorCSS.getValue() : "",
+        js:   editorJS ? editorJS.getValue()  : ""
+    };
+    const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    }
 
-  const body = {
-    html: editorHTML ? editorHTML.getValue() : "",
-    css:  editorCSS  ? editorCSS.getValue()  : "",
-    js:   editorJS   ? editorJS.getValue()   : "",
-    img: screenshot
-  };
-  const requestOptions = {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body)
-  }
+    const resp = await fetch(`http://localhost:8000/codeMaker/codigos/${idProyecto}`, requestOptions);
 
-  const resp = await fetch(`http://localhost:8000/codeMaker/codigos/${idProyecto}`, requestOptions);
-  const data = await resp.json().catch(() => ({}));
+    const data = await resp.json().catch(() => ({}));
+    
+    if (!resp.ok || !data.ok) {
+        alert(data.message || "No se pudo guardar"); // Alerta de error
+        return;
+    }
 
-  if (!resp.ok || !data.ok) {
-    alert(data.message || "No se pudo guardar");
-    return;
-  }
 
-  alert("¡El proyecto ha sido guardado exitosamente!"); 
+    alert("¡El proyecto ha sido guardado exitosamente!"); 
 }
 
 const eliminarProyecto = async (idProyecto) => {
@@ -653,51 +660,6 @@ const resetEditors = (clearPreview = true) => {
   if (clearPreview) {
     frame.srcdoc = "<!doctype html><html><head><meta charset='utf-8'></head><body></body></html>";
   }
-};
-
-const capturarProyecto = async () => {
-    const iframe = document.getElementById("resultado-codigo");
-    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-
-    if (!iframeDoc) {
-        throw new Error("No se pudo acceder al documento del iframe");
-    }
-
-    const clon = document.getElementById("captura-clon");
-    clon.innerHTML = iframeDoc.documentElement.innerHTML;
-
-    const ANCHO_VIRTUAL = 1000;
-    const ALTO_VIRTUAL = 800;
-
-    clon.style.width = `${ANCHO_VIRTUAL}px`;
-    clon.style.height = `${ALTO_VIRTUAL}px`;
-
-    /* 
-      ZOOM:
-      scale(1.4) = 40% más grande
-      scale(1.8) = 80% más grande
-    */
-    clon.style.transform = "scale(1.6)";
-    clon.style.transformOrigin = "top left";
-    clon.style.overflow = "hidden";
-
-    // Captura del clon (con escala nativa del navegador)
-    const canvas = await html2canvas(clon, {
-        backgroundColor: "#ffffff",
-        width: ANCHO_VIRTUAL,
-        height: ALTO_VIRTUAL,
-        scale: 1.2  // mejora nitidez
-    });
-
-    // REDUCCIÓN final a 300x300
-    const finalCanvas = document.createElement("canvas");
-    finalCanvas.width = 300;
-    finalCanvas.height = 300;
-
-    const ctx = finalCanvas.getContext("2d");
-    ctx.drawImage(canvas, 0, 0, 300, 300);
-
-    return finalCanvas.toDataURL("image/png");
 };
 
 
