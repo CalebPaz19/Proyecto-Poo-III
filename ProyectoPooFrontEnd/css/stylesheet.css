@@ -420,36 +420,44 @@ nav{
     grid-template-rows: max-content;
     grid-auto-rows: minmax(100px, 50vh);
     padding: 0rem 3rem 3rem 3rem;
-    gap: 1rem;
+    gap:0.8rem;
     height: 100%;
     
 }
 
-#contenedor-cards .card {
+
+#proyectoCard {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
   min-height: 0;
+  width: 100%;
+  background-color: #d0dbdb;
+  padding: 0.5rem;
+  height: fit-content;
+  gap: 5px;
   
 }
-
-#contenedor-cards .card-body div {
-  height: 10rem;
-  width: 10rem;
+#proyectoCard img{
+  width: 9vw;
 }
 
-#contenedor-cards .card img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  padding: 1rem;
+#proyectoCard button{
+  width: 5vw;
+  padding: 2px;
+  font-size: 0.8rem;
 }
-
-#contenedor-cards .card-body {
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+#proyectoCard>div:first-child {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #f4f5f5;
+}
+#nombreProyectoCard{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 0.8rem;
 }
 
 #seccion-perfil{
