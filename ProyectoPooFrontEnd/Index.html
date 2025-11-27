@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="name" content="Johan Caleb Paz Izaguirre">
     <meta name="name" content="Jesus Eduardo Ramirez Aguilar">
+    <meta name="name" content="">
     <meta name="name" content="">
     <meta name="name" content="">
     <title>Code Live</title>
@@ -23,6 +24,7 @@
 
     <!-- CodeMirror JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/xml/xml.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/javascript/javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/css/css.min.js"></script>
@@ -52,7 +54,6 @@
     <!-- Auto Cierre de Etiquetas HTML -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/edit/closetag.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/fold/xml-fold.min.js"></script>
-    <link rel="icon" href="img/FaviconLogo.png">
 
 
 </head>
@@ -143,8 +144,8 @@
                                 </text>
 
                                 <text x="470" y="95" font-family="Inter, Arial, sans-serif" font-size="90" font-weight="900">
-                                <tspan fill="#FFFFFF">Nombre</tspan>
-                                <tspan fill="#FFFFFF" dx="4">del</tspan>
+                                <tspan fill="#FFFFFF" id="nombreProyectoEditor">Nombre del</tspan>
+                                <!-- <tspan fill="#FFFFFF" dx="4">del</tspan> -->
                                 <tspan fill="#FF0000" dx="4">Proyecto</tspan>
                                 </text>
                             </svg>
@@ -466,7 +467,10 @@
                             <div><img src="img/img_referencia.webp" class="card-img-top" alt="..."></div>
                             <div id="nombreProyectoCard">
                                 <h5>Nombre</h5>
+                            </div>
+                            <div>
                                 <button class="btn btn-danger">Eliminar</button>
+                                <button class="btn btn-info">Compartir</button>
                             </div>
                         </div> -->
                     </div>
@@ -540,6 +544,26 @@
                         </div>
                     </div>
                 </div>
+                <!---Modal para compartir proyectos-->
+                <div id="modalCompartir" class="modal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5>Compartir proyecto</h5>
+                            </div>
+                            <div class="modal-body">
+                                <label>Email del colaborador:</label>
+                                <input type="email" id="emailColaborador" class="form-control">
+                                <div id="compartirError" class="error-message"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-primary" onclick="compartirProyecto()">Compartir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 <!-- Seccion-Perfil -->
                 <section id="seccion-perfil" style="display: none;">
                     <div class="seccion-perfil-cuenta">

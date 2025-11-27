@@ -10,7 +10,7 @@ const esquemaUsuario = new Schema({
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     contraseña: { type: String, required: true },
     //role: { type: String, enum: ["Usuario", "admin"], default: "Usuario" },
-    planId: { type: Schema.Types.ObjectId, ref: "Plan", required: true },
+    planId: { type: Schema.Types.ObjectId, ref: "Planes", required: true },
     preferencias: { type: esquemaPreferencias, default: {} },
 }, { timestamps: true });
 

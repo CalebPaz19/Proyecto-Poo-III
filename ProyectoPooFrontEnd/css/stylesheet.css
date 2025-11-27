@@ -416,12 +416,11 @@ nav{
 }
 #contenedor-cards{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: max-content;
-    grid-auto-rows: minmax(100px, 50vh);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    /* padding: 1.5rem; */
     padding: 0rem 3rem 3rem 3rem;
     gap:0.8rem;
-    height: 100%;
     
 }
 
@@ -458,6 +457,18 @@ nav{
     width: 100%;
     justify-content: space-between;
     font-size: 0.8rem;
+}
+
+#nombreProyectoCard + div{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    
+}
+
+#nombreProyectoCard + div > button{
+    font-size: 0.8rem;
+    padding: 0.2rem 0.4rem;
 }
 
 #seccion-perfil{

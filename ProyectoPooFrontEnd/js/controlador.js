@@ -5,6 +5,14 @@ let loginModal = null;
 let singUpModal = null;
 let nombrePerfil = document.getElementById('nombre-perfil');
 let correoPerfil = document.getElementById("correo-perfil");
+let proyectoParaCompartir = null;
+
+
+const abrirCompartir = (idProyecto) => {
+    proyectoParaCompartir = idProyecto;
+    const modal = new bootstrap.Modal(document.getElementById('modalCompartir'));
+    modal.show();
+};
 
 const abrirModal = (boton) => {
   const loginModalElement = document.getElementById('login-modal');
@@ -581,18 +589,40 @@ const cargarProyectos = async(idPropietario) => {
     cont.innerHTML = ""; // limpia
     
     data.proyectos.forEach(p => {
-      cont.innerHTML +=
+      
+      // badge según propietario/colaborador
+      const badge = p.esPropietario
+        ? `<span class="badge bg-primary propietario-badge">Propietario</span>`
+        : `<span class="badge bg-warning text-dark colaborador-badge">Colaborador</span>`;
 
-      `<div id="proyectoCard">
+      // botón eliminar
+      const btnEliminar = p.esPropietario
+        ? `<button class="btn btn-danger" onclick="eliminarProyecto('${p._id}')">Eliminar</button>`
+        : `<button class="btn btn-secondary" disabled>No puedes eliminar</button>`;
+
+      // botón compartir SOLO PARA PROPIETARIOS
+      const btnCompartir = p.esPropietario
+        ? `<button class="btn btn-info" onclick="abrirCompartir('${p._id}')">Compartir</button>`
+        : "";
+
+      cont.innerHTML += `
+        <div id="proyectoCard">
             <div onclick="abrirProyecto('${p._id}')">
                 <img src="${p.img || 'img/img_referencia.webp'}" class="card-img-top" alt="preview">
             </div>
             <div id="nombreProyectoCard">
-                <h5>${p.nombre}</h5>
-                <button class="btn btn-danger" onclick="eliminarProyecto('${p._id}')">Eliminar</button>
+                <h5>${p.nombre} ${badge}</h5>
             </div>
-        </div>` 
+                <div class="d-flex gap-2">
+                  ${btnEliminar}
+                  ${btnCompartir}
+                </div>
+            <div>
+            </div>
+        </div>
+      `;
     });
+
   } catch (e) {
     console.error(e);
     alert("Error de red o servidor");
@@ -606,6 +636,7 @@ const abrirProyecto = (id) => {
 
 const cargarCodigoProyectoActual = async() => {
   const idProyecto = localStorage.getItem("proyectoActualtId");
+  const nombreProyecto = document.getElementById("nombreProyectoEditor");
   
   if (!idProyecto) return;
     const requestOptions = {
@@ -622,6 +653,7 @@ const cargarCodigoProyectoActual = async() => {
   if (editorHTML) editorHTML.setValue(data.codigo.html || "");
   if (editorCSS)  editorCSS.setValue(data.codigo.css || "");
   if (editorJS)   editorJS.setValue(data.codigo.js || "");
+  nombreProyecto.innerHTML = `${data.nombre}`
   actualizarVistaEditor();
 }
 
@@ -881,4 +913,25 @@ const cargarPlanes = async () => {
           </div>
       `;
   });
+};
+
+const compartirProyecto = async () => {
+    const email = document.getElementById("emailColaborador").value.trim();
+    const idPropietario = sessionStorage.getItem("idUsuarioactual");
+
+    const resp = await fetch(`http://localhost:8000/codeLive/proyectos/compartir/${proyectoParaCompartir}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, idPropietario })
+    });
+
+    const data = await resp.json();
+
+    if (!data.ok) {
+        document.getElementById("compartirError").innerText = data.message;
+        return;
+    }
+
+    alert("Usuario agregado como colaborador");
+    document.getElementById("emailColaborador").value = "";
 };
