@@ -309,7 +309,7 @@
                         </div>
                     </div>
                     <div>
-                        <iframe id="resultado-codigo" frameborder="0"  sandbox="allow-scripts"></iframe>
+                        <iframe id="resultado-codigo" frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe>
                     </div>
                 </div>
             </section>
@@ -409,13 +409,10 @@
 <!-- Seccion-Proyectos               -->
                 <section id="seccion-proyectos" style="display: none;">
                     <div id="contenedor-cards">
-                        <!-- <div class="card">
-                            <div>
-                                <img src="img/img_referencia.webp" class="card-img-top" alt="...">
-                            </div>
-
-                            <div class="card-body">
-                                <h5 class="card-title">Proyecto 1</h5>
+                        <!-- <div id="proyectoCard">
+                            <div><img src="img/img_referencia.webp" class="card-img-top" alt="..."></div>
+                            <div id="nombreProyectoCard">
+                                <h5>Nombre</h5>
                                 <button class="btn btn-danger">Eliminar</button>
                             </div>
                         </div> -->
@@ -632,6 +629,8 @@
         </div>
     </section>
 
+     <!-- Contenedor oculto para capturas del iframe -->
+    <div id="captura-clon" style="position:absolute; left:-9999px; top:-9999px;"></div>
     <script src="js/controlador.js"></script>
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js" type="module"></script>
 </body>
