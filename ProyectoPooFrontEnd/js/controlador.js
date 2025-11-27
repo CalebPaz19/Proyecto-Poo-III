@@ -699,6 +699,3 @@ const capturarProyecto = async () => {
 
     return finalCanvas.toDataURL("image/png");
 };
-
-
-
