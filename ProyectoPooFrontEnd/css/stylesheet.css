@@ -541,12 +541,20 @@ nav{
   color:aliceblue;
 }
 
+.plan:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    border:solid 4px yellow;
+}
+
+
 #plan-free{
-    background-color: #628aff;
+    background-color: #8BC34A;
 }
 
 #plan-basic{
-    background-color: #1b52f7;
+    background-color: #DC3545;
 }
 
 #plan-premium{
@@ -570,12 +578,12 @@ nav{
 }
 
 .plan-body{
-  padding: 16px;
+  padding: 0.1rem 1rem;
 
 }
 
 .plan-body li{
-  font-size: 28px;
+  font-size: 1.2rem;
   margin-bottom: 8px;
 }
 
@@ -588,9 +596,12 @@ nav{
 }
 
 .plan button{
+    display: flex;
     width: 80%;
     background-color: black;
     border: #dcdcdc;
+    align-items: flex-end;
+    justify-content: center;
 }
 
 .error-message {

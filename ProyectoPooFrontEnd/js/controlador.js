@@ -1,11 +1,16 @@
 let editorHTML = null;
 let editorCSS = null;
 let editorJS = null;
+let loginModal = null;
+let singUpModal = null;
 
 const abrirModal = (boton) => {
-  const loginModal = new bootstrap.Modal(document.getElementById('login-modal'));
-  const singUpModal = new bootstrap.Modal(document.getElementById('singUp-modal'));
-  
+  const loginModalElement = document.getElementById('login-modal');
+  const singUpModalElement = document.getElementById('singUp-modal');
+
+  let loginModal = bootstrap.Modal.getInstance(loginModalElement);
+  let singUpModal = bootstrap.Modal.getInstance(singUpModalElement);
+
   if (!loginModal) {
     loginModal = new bootstrap.Modal(loginModalElement);
   }
@@ -335,7 +340,7 @@ const registrarUsuarios = async() => {
         body: JSON.stringify({ nombre, email, contraseña }),
         redirect: "follow"
       };
-      const respuestaRegistro = await fetch("http://localhost:8000/codeMaker/registro",requestOptions );
+      const respuestaRegistro = await fetch("http://localhost:8000/codeLive/registro",requestOptions );
       const data = await respuestaRegistro.json().catch(() => ({}));
 
       if (!respuestaRegistro.ok || !data.ok) {
@@ -411,7 +416,7 @@ const iniciarSesion = async () => {
         body: JSON.stringify({ email, contraseña }),
         redirect: "follow"
       };
-      const respuestaInicioSesion = await fetch("http://localhost:8000/codeMaker/inicioSesion", requestOptions);
+      const respuestaInicioSesion = await fetch("http://localhost:8000/codeLive/inicioSesion", requestOptions);
       const data = await respuestaInicioSesion.json();
       
 
@@ -484,7 +489,7 @@ const crearNuevoProyecto = async() => {
           redirect: "follow"
         }
 
-        const respuestaNuevoProyecto = await fetch("http://localhost:8000/codeMaker/proyectos", requestOptions);
+        const respuestaNuevoProyecto = await fetch("http://localhost:8000/codeLive/proyectos", requestOptions);
         const data = await respuestaNuevoProyecto.json().catch(() => ({}));
 
         if (!respuestaNuevoProyecto.ok || !data.ok) {
@@ -544,7 +549,7 @@ const cargarProyectos = async(idPropietario) => {
       method: "GET",
       redirect: "follow"
     }
-    const respuestaCargarProyectos = await fetch(`http://localhost:8000/codeMaker/proyectos/${idPropietario}`, requestOptions);
+    const respuestaCargarProyectos = await fetch(`http://localhost:8000/codeLive/proyectos/${idPropietario}`, requestOptions);
     const data = await respuestaCargarProyectos.json().catch(() => ({}));
     
     if (!respuestaCargarProyectos.ok || !data.ok) {
@@ -587,7 +592,7 @@ const cargarCodigoProyectoActual = async() => {
       redirect: "follow"
     }
 
-  const respuesta = await fetch(`http://localhost:8000/codeMaker/codigos/${idProyecto}`, requestOptions);
+  const respuesta = await fetch(`http://localhost:8000/codeLive/codigos/${idProyecto}`, requestOptions);
   const data = await respuesta.json().catch(() => ({}));
 
   if (!respuesta.ok || !data.ok) return;
@@ -623,7 +628,7 @@ const guardarCodigoProyectoActual = async() => {
     body: JSON.stringify(body)
   }
 
-  const resp = await fetch(`http://localhost:8000/codeMaker/codigos/${idProyecto}`, requestOptions);
+  const resp = await fetch(`http://localhost:8000/codeLive/codigos/${idProyecto}`, requestOptions);
   const data = await resp.json().catch(() => ({}));
 
   if (!resp.ok || !data.ok) {
@@ -642,7 +647,7 @@ const eliminarProyecto = async (idProyecto) => {
       method: "DELETE",
       redirect: "follow"
     }
-    const resp = await fetch(`http://localhost:8000/codeMaker/proyectos/${idProyecto}`, requestOptions);
+    const resp = await fetch(`http://localhost:8000/codeLive/proyectos/${idProyecto}`, requestOptions);
     const data = await resp.json();
 
     if (!resp.ok || data.ok === false) {
@@ -729,7 +734,7 @@ const puedeCrearProyecto = async() =>{
 
     try {
         // 1. Obtener plan
-        const respPlan = await fetch(`http://localhost:8000/codeMaker/planes/${planId}`);
+        const respPlan = await fetch(`http://localhost:8000/codeLive/planes/${planId}`);
         const dataPlan = await respPlan.json();
 
         if (!dataPlan.ok) {
@@ -740,7 +745,7 @@ const puedeCrearProyecto = async() =>{
         const maxProyectos = dataPlan.plan.maxProyectos;
 
         // 2. Obtener cantidad de proyectos actuales
-        const respProyectos = await fetch(`http://localhost:8000/codeMaker/proyectos/${idUsuario}`);
+        const respProyectos = await fetch(`http://localhost:8000/codeLive/proyectos/${idUsuario}`);
         const dataProyectos = await respProyectos.json();
 
         const totalProyectos = dataProyectos.proyectos.length;
