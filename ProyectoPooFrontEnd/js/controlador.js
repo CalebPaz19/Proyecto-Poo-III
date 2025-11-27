@@ -662,47 +662,5 @@ const resetEditors = (clearPreview = true) => {
   }
 };
 
-const capturarProyecto = async () => {
-    const iframe = document.getElementById("resultado-codigo");
-    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-    if (!iframeDoc) {
-        throw new Error("No se pudo acceder al documento del iframe");
-    }
 
-    const clon = document.getElementById("captura-clon");
-    clon.innerHTML = iframeDoc.documentElement.innerHTML;
-
-    const ANCHO_VIRTUAL = 1000;
-    const ALTO_VIRTUAL = 800;
-
-    clon.style.width = `${ANCHO_VIRTUAL}px`;
-    clon.style.height = `${ALTO_VIRTUAL}px`;
-
-    /* 
-      ZOOM:
-      scale(1.4) = 40% más grande
-      scale(1.8) = 80% más grande
-    */
-    clon.style.transform = "scale(1.6)";
-    clon.style.transformOrigin = "top left";
-    clon.style.overflow = "hidden";
-
-    // Captura del clon (con escala nativa del navegador)
-    const canvas = await html2canvas(clon, {
-        backgroundColor: "#ffffff",
-        width: ANCHO_VIRTUAL,
-        height: ALTO_VIRTUAL,
-        scale: 1.2  // mejora nitidez
-    });
-
-    // REDUCCIÓN final a 300x300
-    const finalCanvas = document.createElement("canvas");
-    finalCanvas.width = 300;
-    finalCanvas.height = 300;
-
-    const ctx = finalCanvas.getContext("2d");
-    ctx.drawImage(canvas, 0, 0, 300, 300);
-
-    return finalCanvas.toDataURL("image/png");
-};
