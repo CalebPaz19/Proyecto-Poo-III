@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import usuariosModel from "../models/usuarios.model";
 import bcrypt from "bcryptjs";
+import planesModel from "../models/planes.model";
 
 export const registro = async(req: Request, res: Response) => {
     try {
@@ -20,13 +21,19 @@ export const registro = async(req: Request, res: Response) => {
         if (existe) {
             return res.status(409).json({ ok: false, message: "El email ya está registrado" });
         }
+
+        const planFree = await planesModel.findOne({ nombre: "Free" });
+        if (!planFree) {
+            return res.status(500).json({ ok: false, message: "El plan Free no está configurado" });
+        }
+
         const contraseñaHash = await bcrypt.hash(contraseña, 10);
         
         const Usuario = await usuariosModel.create({
             email,
             contraseña: contraseñaHash,
             nombre: nombre || "",
-            //role: "Usuario",
+            planId: planFree._id,
             preferencias: { theme: "light", language: "es" }
         });
         
@@ -36,7 +43,7 @@ export const registro = async(req: Request, res: Response) => {
                 _id: Usuario._id,
                 nombre: Usuario.nombre,
                 email: Usuario.email,
-                //role: Usuario.role,
+                planId: Usuario.planId,
                 preferencias: Usuario.preferencias,
                 createdAt: Usuario.createdAt
             }
@@ -71,7 +78,7 @@ export const inicioSesion = async(req: Request, res: Response) => {
 
         const ok = await bcrypt.compare(contraseña, Usuario.contraseña);
         if (!ok) {
-        return res.status(401).json({ ok: false, message: "Contraseña incorrecta" });
+        return res.status(401).json({ ok: false, message: "Contraseña o correo incorrecto" });
         }
         
         return res.status(201).json({
@@ -80,7 +87,7 @@ export const inicioSesion = async(req: Request, res: Response) => {
                 _id: Usuario._id,
                 email: Usuario.email,
                 nombre: Usuario.nombre,
-                //role: Usuario.role,
+                planId: Usuario.planId,
                 preferencias: Usuario.preferencias,
                 createdAt: Usuario.createdAt
             }
