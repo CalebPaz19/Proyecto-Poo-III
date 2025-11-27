@@ -549,15 +549,15 @@ nav{
 }
 
 
-#plan-free{
+.plan-free{
     background-color: #8BC34A;
 }
 
-#plan-basic{
+.plan-basic{
     background-color: #DC3545;
 }
 
-#plan-premium{
+.plan-premium{
     background-color:#2c2c55;
 }
 

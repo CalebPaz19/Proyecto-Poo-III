@@ -3,6 +3,8 @@ let editorCSS = null;
 let editorJS = null;
 let loginModal = null;
 let singUpModal = null;
+let nombrePerfil = document.getElementById('nombre-perfil');
+let correoPerfil = document.getElementById("correo-perfil");
 
 const abrirModal = (boton) => {
   const loginModalElement = document.getElementById('login-modal');
@@ -102,6 +104,7 @@ const mostrarCuenta = () => {
 
 const mostrarPlanes= () => {
   guardarPantallaActual("planes");
+  cargarPlanes();
 
   document.getElementById('pantall-principal').style.display = "none";
   document.getElementById('Landing-nav').style.display = "none";
@@ -114,6 +117,7 @@ const mostrarPlanes= () => {
   document.getElementById('seccion-cuanta').style.display = "none";
   document.getElementById('seccion-planes').style.display = "block";
   document.getElementById('seccion-preferencias').style.display = "none";
+  cargarPlanes();
 }
 
 const mostrarPreferencias= () => {
@@ -190,23 +194,38 @@ const crearEditores = () => {
   if (!editorHTML) {
     editorHTML = CodeMirror.fromTextArea(document.getElementById('editor-html'), {
       mode: 'htmlmixed',
-      lineNumbers: true
+      lineNumbers: true,
+      extraKeys: { "Ctrl-Space": "autocomplete" },
+      autoCloseTags: true
     });
   }
 
   if (!editorCSS) {
     editorCSS = CodeMirror.fromTextArea(document.getElementById('editor-css'), {
       mode: 'css',
-      lineNumbers: true
+      lineNumbers: true,
+      extraKeys: { "Ctrl-Space": "autocomplete" }
     });
   }
 
   if (!editorJS) {
     editorJS = CodeMirror.fromTextArea(document.getElementById('editor-js'), {
       mode: 'javascript',
-      lineNumbers: true
+      lineNumbers: true,
+      extraKeys: { "Ctrl-Space": "autocomplete" }
     });
   }
+  
+  editorHTML.on("inputRead", function(editor) {
+    editor.showHint();
+  });
+  editorCSS.on("inputRead", function(editor) {
+    editor.showHint();
+  });
+  editorJS.on("inputRead", function(editor) {
+    editor.showHint();
+});
+
 };
 
 const frame = document.getElementById('resultado-codigo');
@@ -297,7 +316,7 @@ const registrarUsuarios = async() => {
   nombreError.innerHTML = '';
   emailError.innerHTML = '';
   contraseñaError.innerHTML = '';
-  nombreInput.classList.remove('input-error');
+  nombreInput.classList.remove('input-error');  
   emailInput.classList.remove('input-error');
   contraseñaInput.classList.remove('input-error');
 
@@ -349,12 +368,15 @@ const registrarUsuarios = async() => {
         return;
       }
 
+      
       const userId = data.Usuario?._id;
       if (userId) {
       sessionStorage.setItem("idUsuarioactual", userId);
       sessionStorage.setItem("planId", data.Usuario.planId);    }
       
       // Éxito
+      nombrePerfil.innerHTML = `Nombre: ${data.Usuario.nombre}`;
+      correoPerfil.innerHTML = `Correo: ${data.Usuario.email}`
       mostrarPantallaProyectos();
       document.getElementById('signUp-nombre').value = "";
       document.getElementById('signUp-email').value = "";
@@ -374,8 +396,7 @@ const iniciarSesion = async () => {
   const contraseñaInput = document.getElementById('logIn-contraseña');
   const emailError = document.getElementById('logIn-email-error');
   const contraseñaError = document.getElementById('logIn-contraseña-error');
-  let nombrePerfil = document.getElementById('nombre-perfil');
-  let correoPerfil = document.getElementById("correo-perfil");
+  
 
   // Limpiar errores previos
   emailError.innerHTML = '';
@@ -685,17 +706,12 @@ const capturarProyecto = async () => {
     const clon = document.getElementById("captura-clon");
     clon.innerHTML = iframeDoc.documentElement.innerHTML;
 
-    const ANCHO_VIRTUAL = 1000;
-    const ALTO_VIRTUAL = 800;
+    const ANCHO_VIRTUAL = 1500;
+    const ALTO_VIRTUAL = 1000;
 
     clon.style.width = `${ANCHO_VIRTUAL}px`;
     clon.style.height = `${ALTO_VIRTUAL}px`;
 
-    /* 
-      ZOOM:
-      scale(1.4) = 40% más grande
-      scale(1.8) = 80% más grande
-    */
     clon.style.transform = "scale(1.6)";
     clon.style.transformOrigin = "top left";
     clon.style.overflow = "hidden";
@@ -756,6 +772,7 @@ const puedeCrearProyecto = async() =>{
                 `Tu plan actual solo permite ${maxProyectos} proyecto(s).\n` +
                 `Has alcanzado el límite. Mejora tu plan para crear más.`
             );
+            mostrarPlanes();
             return false;
         }
 
@@ -767,3 +784,101 @@ const puedeCrearProyecto = async() =>{
         return false;
     }
 }
+
+const cambiarPlanUsuario = async (nuevoPlanId) => {
+  const userId = sessionStorage.getItem("idUsuarioactual");
+  if (!userId) {
+      alert("Debes iniciar sesión");
+      return;
+  }
+
+  const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nuevoPlanId })
+  };
+
+  const resp = await fetch(`http://localhost:8000/codeLive/cambiarPlan/${userId}`, requestOptions);
+  const data = await resp.json();
+
+  if (!data.ok) {
+      alert(data.message || "No se pudo actualizar el plan");
+      return;
+  }
+
+  alert("Plan actualizado con éxito");
+
+  // Actualizar plan en sessionStorage
+  sessionStorage.setItem("planId", nuevoPlanId);
+  mostrarPlanes();
+
+};
+
+const cargarPlanes = async () => {
+  const resp = await fetch("http://localhost:8000/codeLive/planes");
+  const data = await resp.json();
+
+  if (!data.ok) return;
+
+  const cont = document.getElementById("contenedor-planes");
+  cont.innerHTML = "";
+
+  const userPlan = sessionStorage.getItem("planId");
+
+  // Definir beneficios del front (pueden venir luego de la BD si querés)
+  const beneficios = {
+      "Free": [
+          "3 Proyectos limitados.",
+          "Editor con Previsualización en Vivo.",
+          "Autocompletado básico.",
+          "Solo uso de librerías externas por CDN.",
+          "Acceso a la Documentación (FAQs)."
+      ],
+      "Basic": [
+          "10 Proyectos permitidos.",
+          "Autocompletado inteligente.",
+          "Soporte para SASS, TS, Pug, etc.",
+          "Subida ilimitada de archivos/assets.",
+          "Compartir proyectos con 1 colaborador."
+      ],
+      "Premium": [
+          "Proyectos ilimitados.",
+          "Colaboración en tiempo real con 3 colaboradores.",
+          "Soporte multiarchivo y estructura de carpetas.",
+          "Conexión con GitHub/GitLab.",
+          "Consola de debugging avanzada."
+      ]
+  };
+
+  data.planes.forEach(p => {
+    const items = beneficios[p.nombre] || [`Proyectos permitidos: ${p.maxProyectos}`];
+    
+    const claseColor =
+    p.nombre === "Free" ? "plan-free" :
+    p.nombre === "Basic" ? "plan-basic" :
+    "plan-premium";
+
+      cont.innerHTML += `
+          <div class="plan ${claseColor}">
+              <div class="plan-price">
+                  <span class="price-title">${p.nombre}</span>
+                  <span style="font-size: 40px;">$${p.precio}</span>
+              </div>
+
+              <div class="plan-body">
+                  <ul>
+                      ${items.map(i => `<li>${i}</li>`).join("")}
+                  </ul>
+              </div>
+
+              <div class="plan-btn">
+                  ${
+                      userPlan === p._id
+                      ? `<button class="btn btn-secondary btn-lg" disabled>Plan Actual</button>`
+                      : `<button class="btn btn-primary btn-lg" onclick="cambiarPlanUsuario('${p._id}')">Elegir Plan</button>`
+                  }
+              </div>
+          </div>
+      `;
+  });
+};

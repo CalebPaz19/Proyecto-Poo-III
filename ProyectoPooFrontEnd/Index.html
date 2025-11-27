@@ -30,7 +30,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/css/css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/htmlmixed/htmlmixed.min.js"></script>
 
-    
+    <!-- CodeMirror HINT (autocompletado) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/show-hint.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/show-hint.min.js"></script>
+
+    <!-- Autocompletado HTML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/html-hint.min.js"></script>
+
+    <!-- Autocompletado CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/css-hint.min.js"></script>
+
+    <!-- Autocompletado JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/javascript-hint.min.js"></script>
+
+    <!-- Dependencias de análisis para JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/anyword-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/xml-hint.min.js"></script>
+
+    <!-- Modo HTML completo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <!-- Auto Cierre de Etiquetas HTML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/edit/closetag.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/fold/xml-fold.min.js"></script>
+
 
 </head>
 <body>
@@ -569,8 +593,8 @@
 
 <!-- Seccion-Planes -->
                 <section id="seccion-planes" style="display: none;">
-                    <div class="contenedor-planes">
-                        <div class="plan" id ="plan-free">
+                    <div id="contenedor-planes" class="contenedor-planes">
+                        <!-- <div class="plan" id ="plan-free">
                             <div class = "plan-price">
                                 <span class = "price-title">Gratis</span>
                                 <span style=" font-size: 40px;">$0</span>
@@ -624,7 +648,7 @@
                             <div class="plan-btn">
                                 <button type="button" class="btn btn-secondary btn-lg">Comprar</button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </section>
                 

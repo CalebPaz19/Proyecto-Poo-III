@@ -12,7 +12,7 @@ const app: Express = express();
 app.use(cors()); //para habilitar cors
 app.use(express.json());
 
-const uri  = "mongodb://localhost:27017/quickcodemaker";
+const uri  = "mongodb://localhost:27017/codeLive";
 
 (async () => {
   await connectarBD(uri);
@@ -20,10 +20,10 @@ const uri  = "mongodb://localhost:27017/quickcodemaker";
 })();
 
 //localhost:8000/
-app.use("/codeMaker", usuariosRouter);
-app.use("/codeMaker", proyectosRouter);
-app.use("/codeMaker", codigosRouters);
-app.use("/codeMaker", planesRouters);
+app.use("/codeLive", usuariosRouter);
+app.use("/codeLive", proyectosRouter);
+app.use("/codeLive", codigosRouters);
+app.use("/codeLive", planesRouters);
 
 app.listen(8000, () => {
     console.log("El servidor esta corriendo en el puerto 8000")
