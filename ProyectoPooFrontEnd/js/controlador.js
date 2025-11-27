@@ -857,7 +857,7 @@ const cargarPlanes = async () => {
 
   const userPlan = sessionStorage.getItem("planId");
 
-  // Definir beneficios del front (pueden venir luego de la BD si querés)
+  // Definir beneficios del front
   const beneficios = {
       "Free": [
           "3 Proyectos limitados.",
@@ -917,6 +917,15 @@ const cargarPlanes = async () => {
 
 const compartirProyecto = async () => {
     const email = document.getElementById("emailColaborador").value.trim();
+    const errorDiv = document.getElementById("compartirError");
+
+    errorDiv.innerText = "";
+
+    if (!email) {
+        errorDiv.innerText = "Debes ingresar un email.";
+        return;
+    }
+
     const idPropietario = sessionStorage.getItem("idUsuarioactual");
 
     const resp = await fetch(`http://localhost:8000/codeLive/proyectos/compartir/${proyectoParaCompartir}`, {
@@ -928,10 +937,20 @@ const compartirProyecto = async () => {
     const data = await resp.json();
 
     if (!data.ok) {
-        document.getElementById("compartirError").innerText = data.message;
+        errorDiv.innerText = data.message || "Error compartiendo el proyecto.";
         return;
     }
 
-    alert("Usuario agregado como colaborador");
+    // LIMPIAR INPUT
     document.getElementById("emailColaborador").value = "";
+
+    // CERRAR MODAL
+    const modalElement = document.getElementById("modalCompartir");
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    modal.hide();
+
+    // CONFIRMACIÓN
+    setTimeout(() => {
+        alert("Proyecto compartido exitosamente");
+    }, 300);
 };

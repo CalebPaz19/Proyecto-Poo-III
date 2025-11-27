@@ -309,7 +309,7 @@ nav{
 
 #barra-lateral{
     border: solid;
-    width: 13%;
+    width: 10%;
     height: 100%;
     background-color: black;
     position: fixed;
@@ -438,13 +438,16 @@ nav{
   
 }
 #proyectoCard img{
-  width: 9vw;
+  width: 100% !important;
+  height: auto;
 }
 
 #proyectoCard button{
-  width: 5vw;
+  /* width: 5vw; */
   padding: 2px;
   font-size: 0.8rem;
+  width: auto !important;
+  flex: 1 1;
 }
 #proyectoCard>div:first-child {
     display: flex;
@@ -711,5 +714,50 @@ input.error {
 }
 
 .btn-crear-proyecto-confirmar:hover {
+    background-color: #0069d9;
+}
+
+/* MODAL COMPARTIR */
+#modalCompartir .modal-content {
+    width: 25vw !important;
+    background-color: #000000;
+    color: #bcccfe;
+    border: 0 !important;
+    font-family: "WDXL Lubrifont SC", sans-serif;
+}
+
+#modalCompartir .modal-header {
+    background-color: #000000;
+    color: #ffffff;
+    border-bottom: 0;
+    text-align: center;
+}
+
+#modalCompartir .modal-body {
+    background-color: #000000;
+    padding: 2rem 1rem !important;
+}
+
+#modalCompartir input {
+    background-color: #ffffff;
+    border-radius: 15px;
+    border: solid;
+    padding: 0.5rem;
+}
+
+#modalCompartir input:focus {
+    border-color: #ff0000;
+}
+
+#modalCompartir .modal-footer {
+    background-color: #000000;
+    border-top: 0;
+}
+
+#modalCompartir .btn-primary {
+    background-color: #007BFF;
+}
+
+#modalCompartir .btn-primary:hover {
     background-color: #0069d9;
 }

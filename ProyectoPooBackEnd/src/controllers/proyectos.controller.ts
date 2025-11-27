@@ -58,31 +58,7 @@ export const crearProyecto = async (req: Request, res: Response) => {
   }
 };
 
-// GET /proyectos/idPropietario=...
-// export  const listarProyectos = async(req: Request, res: Response) => {
-//   try {
-//     const idPropietario = req.params.idPropietario;
-//     if (!idPropietario) return res.status(400).json({ ok: false, message: "idPropietario requerido" });
 
-//     const proyectos = await Proyectos.find({ idPropietario }).sort({ updatedAt: -1 });
-
-//     // Agregar miniatura desde PaqueteCodigos
-//     const proyectosConImagen = await Promise.all(
-//       proyectos.map(async p => {
-//         const paquete = await PaqueteCodigos.findOne({ idProyecto: p._id });
-//         return {
-//           ...p.toObject(),
-//           img: paquete?.img || ""
-//         };
-//       })
-//     );
-
-//     return res.json({ ok: true, proyectos: proyectosConImagen });
-//   } catch (e) {
-//     console.error(e);
-//     return res.status(500).json({ ok: false, message: "Error interno" });
-//   }
-// }
 export const listarProyectos = async (req: Request, res: Response) => {
     try {
         const idUsuario = req.params.idPropietario;

@@ -1,0 +1,256 @@
+@media (max-width: 900px) {
+  #contenedor-Landing-page {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  #Landing-section2 img,
+  dotlottie-wc {
+    width: 90% !important;
+    height: auto !important;
+  }
+
+  #Landing-section1 h1 {
+    font-size: 2.2rem;
+  }
+
+  #Landing-section1 h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* ============ SIDEBAR RESPONSIVO ============ */
+
+/* Desktop grande (normal) */
+#barra-lateral {
+  width: 230px;
+  transition: width .3s ease;
+}
+
+/* Tablets y pantallas medianas */
+@media (max-width: 1024px) {
+  #barra-lateral {
+    width: 120px;
+  }
+  
+  /* Ocultar textos, dejar íconos */
+  .contenedores-barra-lateral div:nth-child(2) {
+    display: none;
+  }
+
+  /* íconos más centrados */
+  .contenedores-barra-lateral {
+    justify-content: center;
+  }
+
+  #barra-lateral svg {
+    width: 110px;
+  }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+  #barra-lateral {
+    width: 70px;
+  }
+
+  /* Ocultar el logo grande completamente */
+  .barra-lateral-header svg {
+    display: none;
+  }
+
+  /* Ocultar textos, solo iconos */
+  .contenedores-barra-lateral div:nth-child(2) {
+    display: none;
+  }
+
+  /* espacio entre items */
+  .contenedores-barra-lateral {
+    padding: 0.8rem;
+    justify-content: center;
+  }
+
+  /* Ajustar contenido principal */
+  .contenedor-proyectos {
+    margin-left: 70px !important;
+  }
+}
+
+
+@media (max-width: 480px) {
+  #proyectoCard h5 {
+    font-size: 0.9rem;
+  }
+
+  #nombreProyectoCard + div button {
+    font-size: 0.7rem;
+    padding: 0.2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  #contenedor-editores {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .altura-editores {
+    height: 35vh;
+  }
+}
+
+@media (max-width: 900px) {
+  #resultado-codigo {
+    height: 40vh !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .Landingpage-nav-div svg {
+    width: 200px;
+  }
+
+  #nombreProyectoEditor {
+    font-size: 1.8rem !important;
+  }
+
+  .seccion-derecha-navegacion button {
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90vw !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .plan {
+    width: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .plan {
+    width: 95%;
+  }
+
+  .plan-body li {
+    font-size: 1rem;
+  }
+}
+
+/* ============ NAV DE PROYECTOS - RESPONSIVE ============ */
+
+@media (max-width: 1024px) {
+  .seccion-barra-navgacion {
+    padding: 1rem 2rem;
+  }
+  
+  .seccion-derecha-navegacion button {
+    padding: 0.4rem 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .seccion-barra-navgacion {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .barra-busqueda {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .barra-busqueda input {
+    width: 80%;
+  }
+
+  .seccion-derecha-navegacion {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .seccion-derecha-navegacion button {
+    width: 80%;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .seccion-derecha-navegacion button {
+    width: 100%;
+    padding: 0.6rem;
+  }
+
+  .btn-group button {
+    font-size: 1.2rem;
+  }
+}
+
+/* Ajuste general para layout */
+.contenedor-proyectos {
+  transition: margin-left .3s ease;
+}
+
+@media (max-width: 1024px) {
+  .contenedor-proyectos {
+    margin-left: 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contenedor-proyectos {
+    margin-left: 70px;
+  }
+}
+
+/* ============ SEPARACIÓN ENTRE EDITORES (MÓVILES) ============ */
+
+@media (max-width: 900px) {
+  #contenedor-editores {
+    gap: 2.5rem !important;   /* Más separación entre cada bloque */
+  }
+
+  .contenedor-codigo {
+    margin-bottom: 1.2rem !important; /* separación adicional */
+    border-radius: 8px;
+    border: 2px solid #222; /* borde más definido */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* resaltado */
+  }
+
+  .nombreEditores {
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    padding: 0.4rem 1rem;
+    background-color: #ffffff;
+    font-size: 1rem;
+  }
+}
+
+/* Extra separación para móviles muy pequeños */
+@media (max-width: 600px) {
+  #contenedor-editores {
+    gap: 3rem !important;
+  }
+
+  .contenedor-codigo {
+    margin-bottom: 1.6rem !important;
+  }
+
+  .altura-editores {
+    height: 45vh; /* Más altura para respirar en teléfono */
+  }
+}
+
+
+

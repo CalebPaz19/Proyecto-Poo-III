@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="name" content="Johan Caleb Paz Izaguirre">
     <meta name="name" content="Jesus Eduardo Ramirez Aguilar">
-    <meta name="name" content="">
-    <meta name="name" content="">
+    <meta name="name" content="Angel Josué Pacheco Erazo">
+    <meta name="name" content="Justin David Gonzales Palma">
     <meta name="name" content="">
     <title>Code Live</title>
     
     <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/responsive.css">
    
     <script src="https://kit.fontawesome.com/e4c6f70817.js" crossorigin="anonymous"></script>
     
@@ -544,25 +545,45 @@
                         </div>
                     </div>
                 </div>
+                
                 <!---Modal para compartir proyectos-->
                 <div id="modalCompartir" class="modal" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
+
                             <div class="modal-header">
-                                <h5>Compartir proyecto</h5>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="50" viewBox="0 0 700 200">
+                                    <g id="logo" transform="translate(3,10) scale(0.5)">
+                                        <path d="M175 35 A60 60 0 1 0 175 135"
+                                            fill="none" stroke="#FF0000" stroke-width="24" stroke-linecap="butt" />
+                                        <polygon points="190,25 212,25 205,70 230,70 210,95 200,115 200,80 185,80"
+                                                fill="#FF0000"/>
+                                        <rect x="200" y="115" width="90" height="24" fill="#FF0000"/>
+                                        <text x="325" y="95" font-family="Inter, Arial" font-size="36" font-weight="600" text-anchor="middle">
+                                            <tspan fill="#FF0000">Code </tspan><tspan fill="#FF0000">Live</tspan>
+                                        </text>
+                                    </g>
+                                    <text x="220" y="75" font-family="Inter, Arial" font-size="70" font-weight="700" fill="#FFFFFF">
+                                        Compartir Proyecto
+                                    </text>
+                                </svg>
                             </div>
+
                             <div class="modal-body">
-                                <label>Email del colaborador:</label>
-                                <input type="email" id="emailColaborador" class="form-control">
+                                <label for="emailColaborador">Email del colaborador</label>
+                                <input type="email" id="emailColaborador">
                                 <div id="compartirError" class="error-message"></div>
                             </div>
+
                             <div class="modal-footer">
-                                <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                 <button class="btn btn-primary" onclick="compartirProyecto()">Compartir</button>
                             </div>
+
                         </div>
                     </div>
                 </div>
+
 
 <!-- Seccion-Perfil -->
                 <section id="seccion-perfil" style="display: none;">
