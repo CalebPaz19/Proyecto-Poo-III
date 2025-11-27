@@ -583,27 +583,31 @@ const cargarCodigoProyectoActual = async() => {
 }
 
 const guardarCodigoProyectoActual = async() => {
-  const idProyecto = localStorage.getItem("proyectoActualtId");
-  if (!idProyecto) return;
+    const idProyecto = localStorage.getItem("proyectoActualtId");
+    if (!idProyecto) return;
 
-  const body = {
-    html: editorHTML ? editorHTML.getValue() : "",
-    css:  editorCSS  ? editorCSS.getValue()  : "",
-    js:   editorJS   ? editorJS.getValue()   : ""
-  };
-  const requestOptions = {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body)
-  }
+    const body = {
+        html: editorHTML ? editorHTML.getValue() : "",
+        css:  editorCSS ? editorCSS.getValue() : "",
+        js:   editorJS ? editorJS.getValue()  : ""
+    };
+    const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    }
 
-  const resp = await fetch(`http://localhost:8000/codeMaker/codigos/${idProyecto}`, requestOptions);
+    const resp = await fetch(`http://localhost:8000/codeMaker/codigos/${idProyecto}`, requestOptions);
 
-  const data = await resp.json().catch(() => ({}));
-  if (!resp.ok || !data.ok) {
-    alert(data.message || "No se pudo guardar");
-    return;
-  }
+    const data = await resp.json().catch(() => ({}));
+    
+    if (!resp.ok || !data.ok) {
+        alert(data.message || "No se pudo guardar"); // Alerta de error
+        return;
+    }
+
+
+    alert("¡El proyecto ha sido guardado exitosamente!"); 
 }
 
 const eliminarProyecto = async (idProyecto) => {
