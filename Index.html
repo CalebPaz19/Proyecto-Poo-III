@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="name" content="Johan Caleb Paz Izaguirre">
+    <meta name="name" content="Jesus Eduardo Ramirez Aguilar">
+    <meta name="name" content="">
+    <meta name="name" content="">
+    <title>Code Live</title>
+    
+    <link rel="stylesheet" href="css/stylesheet.css">
+
+    <script src="https://kit.fontawesome.com/e4c6f70817.js" crossorigin="anonymous"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/show-hint.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/show-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/html-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/css-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/javascript-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/anyword-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/hint/xml-hint.min.js"></script>
+
+    <!-- Modo HTML completo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <!-- Auto Cierre de Etiquetas HTML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/edit/closetag.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/addon/fold/xml-fold.min.js"></script>
+    <link rel="icon" href="img/FaviconLogo.png">
+
+
+</head>
+<body>
+    <section id="pantall-principal" style="display: block">
+        <header>
+            <nav>
+                <section id="Landing-nav"  style="display: block;">
+                    <div class="Landingpage-nav">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="135" viewBox="0 0 450 180">
+
+                                <path
+                                    d="M175 35
+                                    A60 60 0 1 0 175 135"
+                                    fill="none"
+                                    stroke="#FF0000"  
+                                    stroke-width="24"
+                                    stroke-linecap="butt"
+                                />
+
+                                <polygon
+                                    points="
+                                    190,25
+                                    212,25
+                                    205,70
+                                    230,70
+                                    210,95
+                                    200,115
+                                    200,80
+                                    185,80
+                                    "
+                                    fill="#FF0000"
+                                />
+
+                                <rect x="200" y="115" width="90" height="24" fill="#FF0000"/>
+
+                                <text x="325" y="95" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="600" text-anchor="middle">
+                                    <tspan fill="#FF0000">Code </tspan>
+                                    <tspan fill="#FF0000">Live</tspan>
+                                </text>
+                                </svg>
+                        </div>
+                        <div>
+                            <ul id="ul-landigPage">
+                                <li id="boton-formulario-iniciarSesion" onclick="abrirModal(this)">Iniciar Sesion</li>
+                                <li id="boton-formulario-registro" onclick="abrirModal(this)">Registrarse</li>
+                                <li>Acerca de</li>
+                                <li>Contacto</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="editor-nav" style="display: none;">
+                    <div class="Landingpage-nav">
+                        <div class="Landingpage-nav-div">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="350" height="135" viewBox="0 0 1600 180">
+
+                                <path
+                                    d="M175 35
+                                    A60 60 0 1 0 175 135"
+                                    fill="none"
+                                    stroke="#FF0000"  
+                                    stroke-width="24"
+                                    stroke-linecap="butt"
+                                />
+
+                                <polygon
+                                    points="
+                                    190,25
+                                    212,25
+                                    205,70
+                                    230,70
+                                    210,95
+                                    200,115
+                                    200,80
+                                    185,80
+                                    "
+                                    fill="#FF0000"
+                                />
+
+                                <rect x="200" y="115" width="90" height="24" fill="#FF0000"/>
+
+                                <text x="325" y="95" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="600" text-anchor="middle">
+                                    <tspan fill="#FF0000">Code </tspan>
+                                    <tspan fill="#FF0000">Live</tspan>
+                                </text>
+
+                                <text x="470" y="95" font-family="Inter, Arial, sans-serif" font-size="90" font-weight="900">
+                                <tspan fill="#FFFFFF">Nombre</tspan>
+                                <tspan fill="#FFFFFF" dx="4">del</tspan>
+                                <tspan fill="#FF0000" dx="4">Proyecto</tspan>
+                                </text>
+                            </svg>
+                        </div>
+                        <div class="seccion-derecha-navegacion">
+                                <Button onclick="guardarCodigoProyectoActual()"><i id="icono-nube" class=" fa-chisel fa-regular fa-cloud" onclick="guardarCodigoProyectoActual()"></i>Guardar</Button>
+                                <div class="btn-group">
+                                <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-bars"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li onclick="mostrarPerfil()"><a class="dropdown-item" href="#">Perfil</a></li>
+                                    <li onclick="mostrarPantallaProyectos()"><a class="dropdown-item" href="#">Proyectos</a></li>
+                                    <li onclick="mostrarPreferencias()"><a class="dropdown-item" href="#">Ajustes</a></li>
+                                    <li onclick="mostrarLandingPage()"><a class="dropdown-item" href="#">Cerrar sesion</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </nav>
+        </header>
+        
+        <main>
+            <main>
+    <video autoplay muted loop playsinline id="video-fondo-landing">
+        <source src="video/videofondo.mp4" type="video/mp4">
+        Tu navegador no soporta el video.
+    </video>
+            <section id="Landing-page"  style="display: block;">
+                <div id="contenedor-Landing-page">
+                    <section id="Landing-section1">
+                        <h1>Crea codigo HTML, CSS, <br>y JavaScript</h1>
+                        <h2>Genera y personaliza tu codigo web facil y rapido</h2>
+                            <div>
+                                <button id="btn-tryIt" onclick="renderizarEditorCodigo()">
+                                    Try it
+                                </button>
+                            </div>    
+                    </section>
+                    <section id="Landing-section2">
+                    <dotlottie-wc
+                    src="https://lottie.host/3bedb8ac-c7bb-4da5-892d-11174af9c318/fvuubSNiWV.lottie" style="width: 550px;height: 550px"
+                    autoplay
+                    loop
+                    ></dotlottie-wc>
+                    </section>
+                </div>
+            </section>
+
+            <div id="login-modal" class="modal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="50" viewBox="0 0 700 200">
+
+                            
+                            <g id="logo" transform="translate(3,10) scale(0.5)">
+                                <path
+                                    d="M175 35
+                                    A60 60 0 1 0 175 135"
+                                    fill="none"
+                                    stroke="#FF0000"
+                                    stroke-width="24"
+                                    stroke-linecap="butt"
+                                />
+
+                                <polygon
+                                    points="
+                                    190,25
+                                    212,25
+                                    205,70
+                                    230,70
+                                    210,95
+                                    200,115
+                                    200,80
+                                    185,80
+                                    "
+                                    fill="#FF0000"
+                                />
+
+                                <rect x="200" y="115" width="90" height="24" fill="#FF0000"/>
+
+                                <text x="325" y="95" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="600" text-anchor="middle">
+                                    <tspan fill="#FF0000">Code </tspan>
+                                    <tspan fill="#FF0000">Live</tspan>
+                                </text>
+                            </g>
+
+                            <text x="220" y="75" font-family="Inter, Arial, sans-serif" font-size="90" font-weight="700" fill="#FFFFFF">
+                                Iniciar Sesión
+                            </text>
+
+                        </svg>
+
+
+
+                        </div>
+                        <div class="modal-body">
+                            <form class="formulario-iniciarSesion" action="">
+                                <label for="logIn-email">Email</label>
+                                <input type="email" id="logIn-email" placeholder="email">
+                                <div id="logIn-email-error" class="error-message"></div>
+
+                                <label for="logIn-contraseña">Contraseña</label>
+                                <input type="password" id="logIn-contraseña" placeholder="contrasena">
+                                <div id="logIn-contraseña-error" class="error-message"></div>
+                                
+                                <div><button id="btn-iniciarSesion" type="button" onclick="iniciarSesion()">Iniciar sesion</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="singUp-modal" class="modal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="50" viewBox="0 0 700 200">
+
+                            
+                            <g id="logo" transform="translate(3,10) scale(0.5)">
+                                <path
+                                    d="M175 35
+                                    A60 60 0 1 0 175 135"
+                                    fill="none"
+                                    stroke="#FF0000"
+                                    stroke-width="24"
+                                    stroke-linecap="butt"
+                                />
+
+                                <polygon
+                                    points="
+                                    190,25
+                                    212,25
+                                    205,70
+                                    230,70
+                                    210,95
+                                    200,115
+                                    200,80
+                                    185,80
+                                    "
+                                    fill="#FF0000"
+                                />
+
+                                <rect x="200" y="115" width="90" height="24" fill="#FF0000"/>
+
+                                <text x="325" y="95" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="600" text-anchor="middle">
+                                    <tspan fill="#FF0000">Code </tspan>
+                                    <tspan fill="#FF0000">Live</tspan>
+                                </text>
+                            </g>
+
+                            <text x="220" y="75" font-family="Inter, Arial, sans-serif" font-size="90" font-weight="700" fill="#FFFFFF">
+                                Registrate
+                            </text>
+
+                        </svg>
+                        </div>
+                        <div class="modal-body">
+                            <form class="formulario-iniciarSesion" action="">
+                                <label for="signUp-nombre">Nombre</label>
+                                <input type="text" id="signUp-nombre" placeholder="ingrese su nombre">
+                                <div id="signUp-nombre-error" class="error-message"></div>
+
+
+                                <label for="signUp-email">Email</label>
+                                <input type="email" id="signUp-email" placeholder="email valido: alguien@ejemplo.com">
+                                <div id="signUp-email-error" class="error-message"></div>
+
+                                <label for="signUp-contraseña">Contraseña</label>
+                                <input type="password" id="signUp-contraseña" name="contraseña" placeholder="contrasena">
+                                <div id="signUp-contraseña-error" class="error-message"></div>
+
+                                <div><button id="btn-registro" type="button" onclick="registrarUsuarios()">Registrarse</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section id="seccion-editor-codigo" style="display: none;">
+                <div id="contenedor-editor-codigo">
+                    <div id="contenedor-editores"  class="row">
+                        <div class="col">
+                            <section id="html" class="altura-editores">
+                                <div>
+                                    <span class="nombreEditores">HTML</span>
+                                </div>
+                                <div class="contenedor-codigo">
+                                    <textarea id="editor-html"></textarea>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col">
+                            <section id="css" class="altura-editores">
+                                <div>
+                                    <span class="nombreEditores">CSS</span>
+                                </div>
+                                <div class="contenedor-codigo">
+                                    <textarea id="editor-css"></textarea>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col">
+                            <section id="javascript" class="altura-editores">
+                                <div>
+                                    <span class="nombreEditores">JAVASCRIPT</span>
+                                </div>
+                                <div class="contenedor-codigo">
+                                    <textarea id="editor-js"></textarea>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div>
+                        <iframe id="resultado-codigo" frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </section>
+    
+    <section id="pantalla-administrativa" style="display: none;">
+        <div id="contenedor-pantalla-admistrativa">
+
+            <div id="barra-lateral">
+                <section class="barra-lateral-header">
+                    <div onclick="renderizarEditorCodigo()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="135" viewBox="0 0 450 180">
+
+                                        <path
+                                            d="M175 35
+                                            A60 60 0 1 0 175 135"
+                                            fill="none"
+                                            stroke="#FF0000"  
+                                            stroke-width="24"
+                                            stroke-linecap="butt"
+                                        />
+
+                                        <polygon
+                                            points="
+                                            190,25
+                                            212,25
+                                            205,70
+                                            230,70
+                                            210,95
+                                            200,115
+                                            200,80
+                                            185,80
+                                            "
+                                            fill="#FF0000"
+                                        />
+
+                                        <rect x="200" y="115" width="90" height="24" fill="#FF0000"/>
+
+                                        <text x="325" y="95" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="600" text-anchor="middle">
+                                            <tspan fill="#FF0000">Code </tspan>
+                                            <tspan fill="#FF0000">Live</tspan>
+                                        </text>
+                                        </svg>
+                    </div>
+                </section>
+                <section class="barra-lateral-main">
+                    <div class="contenedores-barra-lateral" onclick="mostrarPerfil()">
+                        <div><i class="fa-solid fa-circle-user"></i></div>
+                        <div>Perfil</div>
+                    </div>
+                    <div class="contenedores-barra-lateral" onclick="mostrarCuenta()">
+                        <div><i class="fa-solid fa-user-shield"></i></div>
+                        <div>Cuenta</div>
+                    </div>
+                    <div class="contenedores-barra-lateral" onclick="mostrarPantallaProyectos()">
+                        <div><i class="fa-solid fa-folder-open"></i></div>
+                        <div>Proyectos</div>
+                    </div>
+                    <div class="contenedores-barra-lateral" onclick="mostrarPlanes()">
+                        <div><i class="fa-solid fa-tags"></i></div>
+                        <div>Planes</div>
+                    </div>
+                    <div class="contenedores-barra-lateral" onclick="mostrarPreferencias()">
+                        <div><i class="fa-solid fa-sliders"></i></div>
+                        <div>Preferencias</div>
+                    </div>
+                </section>
+            </div>
+            <div class="contenedor-proyectos">
+                <div class="seccion-barra-navgacion">
+                    <div>
+                        <div class="barra-busqueda">
+                            <input type="text"></input>
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        
+                    </div>
+                    <div class="seccion-derecha-navegacion">
+                        <button onclick="crearNuevoProyecto()">
+                            <i class="fa-solid fa-plus"></i>
+                            <div>Nuevo</div>
+                        </button>
+                        <div class="btn-group">
+                            <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-bars"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li onclick="mostrarPerfil()"><a class="dropdown-item" href="#">Perfil</a></li>
+                                <li onclick="mostrarPreferencias()"><a class="dropdown-item" href="#">Ajustes</a></li>
+                                <li onclick="mostrarLandingPage()"><a class="dropdown-item" href="#">Cerrar sesion</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+<!-- Seccion-Proyectos               -->
+                <section id="seccion-proyectos" style="display: none;">
+                    <div id="contenedor-cards">
+                        <!-- <div id="proyectoCard">
+                            <div><img src="img/img_referencia.webp" class="card-img-top" alt="..."></div>
+                            <div id="nombreProyectoCard">
+                                <h5>Nombre</h5>
+                                <button class="btn btn-danger">Eliminar</button>
+                            </div>
+                        </div> -->
+                    </div>
+                </section>
+
+                <!-- Modal para crear proyecto -->
+
+                <div id="crearProyectoModal" class="modal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="50" viewBox="0 0 700 200">
+                                        <g id="logo" transform="translate(3,10) scale(0.5)">
+                                            <path
+                                                d="M175 35
+                                                A60 60 0 1 0 175 135"
+                                                fill="none"
+                                                stroke="#FF0000"
+                                                stroke-width="24"
+                                                stroke-linecap="butt"
+                                            />
+
+                                            <polygon
+                                                points="
+                                                190,25
+                                                212,25
+                                                205,70
+                                                230,70
+                                                210,95
+                                                200,115
+                                                200,80
+                                                185,80
+                                                "
+                                                fill="#FF0000"
+                                            />
+
+                                            <rect x="200" y="115" width="90" height="24" fill="#FF0000"/>
+
+                                            <text x="325" y="95" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="600" text-anchor="middle">
+                                                <tspan fill="#FF0000">Code </tspan>
+                                                <tspan fill="#FF0000">Live</tspan>
+                                            </text>
+                                        </g>
+
+                                        <text x="220" y="75" font-family="Inter, Arial, sans-serif" font-size="70" font-weight="700" fill="#FFFFFF">
+                                            Nuevo Proyecto
+                                        </text>
+
+                                    </svg>
+
+                            </div>
+                            <div class="modal-body">
+                                <form class="formulario-iniciarSesion" action="">
+                                    <label for="nombreProyectoInput">Nombre del proyecto</label>
+                                    <input type="text" id="nombreProyectoInput">
+                                    <div id="nombreProyectoError" class="error-message"></div>
+                                    <div class="botones-crear-proyecto">
+                                        <div>
+                                            <button type="button" class="btn-crear-proyecto btn-crear-proyecto-cancelar" data-bs-dismiss="modal">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button type="button" class="btn-crear-proyecto btn-crear-proyecto-confirmar" id="btnConfirmarCrearProyecto">
+                                                Crear
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!-- Seccion-Perfil -->
+                <section id="seccion-perfil" style="display: none;">
+                    <div class="seccion-perfil-cuenta">
+                        <div>
+                            imagen perfil
+                        </div>
+                        <div class="contenedores-derecha-perfil">
+                            <i class="fa-solid fa-image"></i>
+                        </div>
+                        <div>
+                            acerca de ti
+                        </div>
+                        <div class="contenedores-derecha-perfil">
+                                <div id="nombre-perfil">Nombre:</div>
+                                <div id="correo-perfil">Correo:</div>
+                        </div>
+                    </div>
+                </section>
+<!-- Seccion-Cuenta -->
+                <section id="seccion-cuanta" style="display: none;">
+                    <div class="seccion-perfil-cuenta">
+                        <div>
+                            Nombre de usuario
+                        </div>
+                        <div class="contenedores-derecha-perfil">
+                            <label>Nuevo nombre</label>
+                            <input type="text">
+                            <button>Cambiar</button>
+                        </div>
+                        <div>
+                            Contraseña
+                        </div>
+                        <div class="contenedores-derecha-perfil">
+                            <label>Contraseña actual</label>
+                            <input type="text">
+                            <label>Contraseña nueva</label>
+                            <input type="text">
+                            <button>Cambiar</button>
+                        </div>
+                        <div>
+                            Correo
+                        </div>
+                        <div class="contenedores-derecha-perfil">
+                            <label>Cambiar Correo</label>
+                            <input type="text">
+                            <button>Cambiar</button>
+                        </div>
+                    </div>
+                </section>
+
+<!-- Seccion-Planes -->
+                <section id="seccion-planes" style="display: none;">
+                    <div id="contenedor-planes" class="contenedor-planes">
+                        <!-- <div class="plan" id ="plan-free">
+                            <div class = "plan-price">
+                                <span class = "price-title">Gratis</span>
+                                <span style=" font-size: 40px;">$0</span>
+                            </div>
+                            <div class = "plan-body" >
+                                <ul>
+                                    <li>3 Proyectos limitados.</li>
+                                    <li>Editor con Previsualización en Vivo.</li>
+                                    <li>Autocompletado básico.</li>
+                                    <li>Solo uso de librerías externas por CDN.</li>
+                                    <li>Acceso a la Documentación (FAQs).</li>
+                                </ul> 
+                            </div>
+                            <div class="plan-btn">
+                                <button type="button" class="btn btn-secondary btn-lg">Comprar</button>
+                            </div>
+                        </div>
+                        <div class="plan" id ="plan-basic">
+                            <div class = "plan-price">
+                                <span class = "price-title">Basico</span>
+                                <span style=" font-size: 40px;">$5</span>
+                            </div>
+                            <div class = "plan-body">
+                                <ul>
+                                    <li>10 Proyectos limitados.</li>
+                                    <li>Autocompletado inteligente</li>
+                                    <li>Preprocesadores (SASS, TS, Pug, etc.)</li>
+                                    <li>Subida Ilimitada de archivos y assets.</li>
+                                    <li>Compartir proyectos con 1 colaborador</li>
+                                </ul> 
+                            </div>
+                            <div class="plan-btn">
+                                <button type="button" class="btn btn-secondary btn-lg">Comprar</button>
+                            </div>
+                        </div>
+                        <div class="plan" id ="plan-premium">
+                            <div class = "plan-price" >
+                                <span class = "price-title">Premium</span>
+                                <span style=" font-size: 40px;">$10</span>
+                            </div>
+                            <div class = "plan-body">
+                                <ul>
+                                    <li>Proyectos ilimitados</li>
+                                    <li>Colaboración en tiempo real con 3 colaboradores.</li>
+                                    <li>Soporte Multi-archivo y estructura de carpetas.</li>
+                                    <li>Conexión directa con Git (GitHub/GitLab) para versionamiento.</li>
+                                    <li>Acceso a la Consola de Debugging Avanzada y logs.</li>
+                                    
+                                </ul> 
+                            </div>
+                            <div class="plan-btn">
+                                <button type="button" class="btn btn-secondary btn-lg">Comprar</button>
+                            </div>
+                        </div> -->
+                    </div>
+                </section>
+                
+<!-- Seccion-Preferencias -->
+                <section id="seccion-preferencias" style="display: none;">
+                    <div class="seccion-perfil-cuenta">
+                        <div>
+                        Tema
+                        </div>
+                        <div class="contenedores-derecha-perfil">
+                            <h4>Seleccionar el tema a aplicar</h4>
+                            <div class="contenedor-inputs">
+                                <input type="radio">
+                                <label>claro</label>
+                                <input type="radio">
+                                <label>Oscuro</label>
+                            </div>
+                        </div>
+                        <div>
+                            Idioma
+                        </div>
+                        <div class="contenedores-derecha-perfil">
+                            <h4>Seleccione un idioma</h4>
+                            <select name="idioma" id="">
+                                <option value=""></option>
+                                <option value="">Ingles</option>
+                                <option value="">Español</option>
+                            </select>                       
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+<!-- Modal simple -->
+<div id="modalAviso" style="display:none">
+  <div class="modal-contenido">
+    <p id="mensajeModal"></p>
+    <button id="cerrarModal">Aceptar</button>
+  </div>
+</div>
+
+
+    <!-- Contenedor oculto para capturas del iframe -->
+    <div id="captura-clon" style="position:absolute; left:-9999px; top:-9999px;"></div>
+    <script src="js/controlador.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js" type="module"></script>
+</body>
+</html>
