@@ -8,6 +8,27 @@ let correoPerfil = document.getElementById("correo-perfil");
 let proyectoParaCompartir = null;
 
 
+const mostrarAviso = (mensaje, callback = null) => {
+    const modal = document.getElementById("modalAviso");
+    const texto = document.getElementById("mensajeModal");
+    const btn = document.getElementById("cerrarModal");
+
+    texto.innerText = mensaje;
+    modal.style.display = "flex";
+
+    // Quitar eventos previos
+    const nuevoBoton = btn.cloneNode(true);
+    btn.parentNode.replaceChild(nuevoBoton, btn);
+
+    // Evento del botón
+    nuevoBoton.onclick = () => {
+        modal.style.display = "none";
+        if (callback) callback();   // para confirmaciones si lo necesitas
+    };
+};
+
+
+
 const abrirCompartir = (idProyecto) => {
     proyectoParaCompartir = idProyecto;
     const modal = new bootstrap.Modal(document.getElementById('modalCompartir'));
@@ -48,7 +69,7 @@ const mostrarPantallaProyectos= () => {
   const idPropietario = sessionStorage.getItem("idUsuarioactual");
 
   if (!idPropietario) {
-    alert("Primero debes iniciar sesión para ver tus proyectos");
+    mostrarAviso("Primero debes iniciar sesión para ver tus proyectos");
     mostrarLandingPage();
     return;
   }
@@ -112,7 +133,6 @@ const mostrarCuenta = () => {
 
 const mostrarPlanes= () => {
   guardarPantallaActual("planes");
-  cargarPlanes();
 
   document.getElementById('pantall-principal').style.display = "none";
   document.getElementById('Landing-nav').style.display = "none";
@@ -582,7 +602,7 @@ const cargarProyectos = async(idPropietario) => {
     const data = await respuestaCargarProyectos.json().catch(() => ({}));
     
     if (!respuestaCargarProyectos.ok || !data.ok) {
-      alert(data.message || "No se pudieron cargar los proyectos");
+      mostrarAviso(data.message || "No se pudieron cargar los proyectos");
       return;
     }
     const cont = document.getElementById("contenedor-cards");
@@ -625,7 +645,7 @@ const cargarProyectos = async(idPropietario) => {
 
   } catch (e) {
     console.error(e);
-    alert("Error de red o servidor");
+    mostrarAviso("Error de red o servidor");
   }
 }
 
@@ -685,37 +705,41 @@ const guardarCodigoProyectoActual = async() => {
   const data = await resp.json().catch(() => ({}));
 
   if (!resp.ok || !data.ok) {
-    alert(data.message || "No se pudo guardar");
+    mostrarAviso(data.message || "No se pudo guardar");
     return;
   }
 
-  alert("¡El proyecto ha sido guardado exitosamente!"); 
+  mostrarAviso("¡El proyecto ha sido guardado exitosamente!");
 }
 
 const eliminarProyecto = async (idProyecto) => {
-  if (!confirm("¿Seguro que quieres eliminar este proyecto?")) return;
+  mostrarAviso("¿Seguro que deseas eliminar este proyecto?", () => {
+    eliminarProyectoConfirmado(idProyecto);
+  });
+  return;
 
-  try {
-    const requestOptions = {
-      method: "DELETE",
-      redirect: "follow"
-    }
-    const resp = await fetch(`http://localhost:8000/codeLive/proyectos/${idProyecto}`, requestOptions);
-    const data = await resp.json();
 
-    if (!resp.ok || data.ok === false) {
-      alert(data.message || "Error eliminando proyecto");
-      return;
-    }
+  // try {
+  //   const requestOptions = {
+  //     method: "DELETE",
+  //     redirect: "follow"
+  //   }
+  //   const resp = await fetch(`http://localhost:8000/codeLive/proyectos/${idProyecto}`, requestOptions);
+  //   const data = await resp.json();
 
-    alert("Proyecto eliminado");
-    // refrescar la lista de proyectos
-    mostrarPantallaProyectos();
+  //   if (!resp.ok || data.ok === false) {
+  //     mostrarAviso(data.message || "Error eliminando proyecto");
+  //     return;
+  //   }
 
-  } catch (e) {
-    console.error(e);
-    alert("Error de red o servidor");
-  }
+  //   mostrarAviso("Proyecto eliminado");
+  //   // refrescar la lista de proyectos
+  //   mostrarPantallaProyectos();
+
+  // } catch (e) {
+  //   console.error(e);
+  //   mostrarAviso("Error de red o servidor");
+  // }
 };
 
 const resetEditors = (clearPreview = true) => {
@@ -776,7 +800,7 @@ const puedeCrearProyecto = async() =>{
     const idUsuario = sessionStorage.getItem("idUsuarioactual");
 
     if (!planId || !idUsuario) {
-        alert("Error: Sesión inválida. Vuelve a iniciar sesión.");
+        mostrarAviso("Error: Sesión inválida. Vuelve a iniciar sesión.");
         return false;
     }
 
@@ -786,7 +810,7 @@ const puedeCrearProyecto = async() =>{
         const dataPlan = await respPlan.json();
 
         if (!dataPlan.ok) {
-            alert("Error obteniendo la información del plan del usuario.");
+            mostrarAviso("Error obteniendo la información del plan del usuario.");
             return false;
         }
 
@@ -800,11 +824,11 @@ const puedeCrearProyecto = async() =>{
 
         // 3. Validar límite
         if (totalProyectos >= maxProyectos) {
-            alert(
-                `Tu plan actual solo permite ${maxProyectos} proyecto(s).\n` +
-                `Has alcanzado el límite. Mejora tu plan para crear más.`
+            mostrarAviso(
+              `Tu plan actual solo permite ${maxProyectos} proyecto(s). Has alcanzado el límite.`,
+              () => mostrarPlanes()
             );
-            mostrarPlanes();
+
             return false;
         }
 
@@ -812,7 +836,7 @@ const puedeCrearProyecto = async() =>{
 
     } catch (error) {
         console.error("Error verificando límite de plan:", error);
-        alert("Error verificando los límites del plan.");
+        mostrarAviso("Error verificando los límites del plan.");
         return false;
     }
 }
@@ -820,7 +844,7 @@ const puedeCrearProyecto = async() =>{
 const cambiarPlanUsuario = async (nuevoPlanId) => {
   const userId = sessionStorage.getItem("idUsuarioactual");
   if (!userId) {
-      alert("Debes iniciar sesión");
+      mostrarAviso("Debes iniciar sesión");
       return;
   }
 
@@ -834,11 +858,11 @@ const cambiarPlanUsuario = async (nuevoPlanId) => {
   const data = await resp.json();
 
   if (!data.ok) {
-      alert(data.message || "No se pudo actualizar el plan");
+      mostrarAviso(data.message || "No se pudo actualizar el plan");
       return;
   }
 
-  alert("Plan actualizado con éxito");
+  mostrarAviso("Plan actualizado con éxito");
 
   // Actualizar plan en sessionStorage
   sessionStorage.setItem("planId", nuevoPlanId);
@@ -951,6 +975,24 @@ const compartirProyecto = async () => {
 
     // CONFIRMACIÓN
     setTimeout(() => {
-        alert("Proyecto compartido exitosamente");
+        mostrarAviso("Proyecto compartido exitosamente");
     }, 300);
 };
+
+const eliminarProyectoConfirmado = async(idProyecto) => {
+    try {
+        const resp = await fetch(`http://localhost:8000/codeLive/proyectos/${idProyecto}`, { method: "DELETE" });
+        const data = await resp.json();
+
+        if (!data.ok) {
+            return mostrarAviso(data.message || "No se pudo eliminar el proyecto");
+        }
+
+        mostrarAviso("Proyecto eliminado con éxito");
+        mostrarPantallaProyectos();
+
+    } catch (error) {
+        mostrarAviso("Error de red o servidor");
+    }
+};
+
